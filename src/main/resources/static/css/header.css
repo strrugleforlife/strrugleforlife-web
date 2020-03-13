@@ -1,5 +1,3 @@
-header {
-    position: relative;
-    height: 100vh;
-    background: url(../image/header1.png) center / cover;
+body {
+    background-image: url(../image/dark_Tire.png);
 }
