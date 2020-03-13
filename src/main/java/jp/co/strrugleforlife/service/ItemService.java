@@ -21,7 +21,7 @@ public class ItemService {
   }
 
   @Transactional
-  public Item findOne(Long id) {
+  public Item findOne(Integer id) {
     return itemMapper.findOne(id);
   }
 
@@ -36,7 +36,7 @@ public class ItemService {
   }
 
   @Transactional
-  public void delete(Long id) {
+  public void delete(Integer id) {
     itemMapper.delete(id);
   }
 

@@ -30,7 +30,7 @@ public class ItemController {
   }
 
   @GetMapping("{id}")
-  public String show(@PathVariable Long id, Model model) {
+  public String show(@PathVariable Integer id, Model model) {
     model.addAttribute("item", itemService.findOne(id));
     return "show";
   }
@@ -41,7 +41,7 @@ public class ItemController {
   }
 
   @GetMapping("{id}/edit")
-  public String edit(@PathVariable Long id, @ModelAttribute("item") Item item, Model model) {
+  public String edit(@PathVariable Integer id, @ModelAttribute("item") Item item, Model model) {
     model.addAttribute("item", itemService.findOne(id));
     return "edit";
   }
@@ -57,7 +57,7 @@ public class ItemController {
   }
 
   @PutMapping("{id}")
-  public String update(@PathVariable Long id, @ModelAttribute("item") @Validated Item item, BindingResult result, Model model) {
+  public String update(@PathVariable Integer id, @ModelAttribute("item") @Validated Item item, BindingResult result, Model model) {
     if (result.hasErrors()) {
       model.addAttribute("item", item);
       return "edit";
@@ -69,7 +69,7 @@ public class ItemController {
   }
 
   @DeleteMapping("{id}")
-  public String delete(@PathVariable Long id) {
+  public String delete(@PathVariable Integer id) {
     itemService.delete(id);
     return "redirect:/items";
   }

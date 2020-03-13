@@ -11,11 +11,11 @@ import jp.co.strrugleforlife.domain.Item;
 public interface ItemMapper {
   List<Item> findAll();
 
-  Item findOne(Long id);
+  Item findOne(Integer id);
 
   void save(Item item);
 
   void update(Item item);
 
-  void delete(Long id);
+  void delete(Integer id);
 }

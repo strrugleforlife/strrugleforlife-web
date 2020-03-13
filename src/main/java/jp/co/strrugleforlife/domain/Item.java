@@ -7,23 +7,23 @@ import javax.validation.constraints.Size;
 import org.hibernate.validator.constraints.NotBlank;
 
 public class Item {
-  private Long id;
+  private Integer id;
 
   @NotBlank(message="商品名を記入してください。")
   private String name;
 
   @Min(value=10, message="10以上の数値を入力してください。")
   @Max(value=10000, message="10000以下の数値を入力してください。")
-  private float price;
+  private Integer price;
 
   @Size(max=50, message="ベーダー名は50文字を超えないでください。")
   private String vendor;
 
-  public Long getId() {
+  public Integer getId() {
     return id;
   }
 
-  public void setId(Long id) {
+  public void setId(Integer id) {
     this.id = id;
   }
 
@@ -35,11 +35,11 @@ public class Item {
     this.name = name;
   }
 
-  public float getPrice() {
+  public Integer getPrice() {
     return price;
   }
 
-  public void setPrice(float price) {
+  public void setPrice(Integer price) {
     this.price = price;
   }
 
