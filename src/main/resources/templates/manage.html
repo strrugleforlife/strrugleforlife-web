@@ -5,16 +5,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <link rel="stylesheet" href="/css/bootstrap.min.css" />
     <link rel="stylesheet" href="/css/header.css" />
-    <title>管理画面</title>
+    <link rel="stylesheet" href="/css/button.css" />
+    <link rel="stylesheet" href="/css/body.css" />
+    <title>Strrugle For Life</title>
 </head>
+
 <header>
-    <h1>Halfscreen Photo Header</h1>
+    <h1>すとりむ？</h1>
 </header>
+
 <body>
-
     <!-- ロースター作成 -->
-    <a class="btn btn-primary" th:href="@{/roster}">ロースター作成</a>
-
+    <p>
+    <a th:href="@{/roster}"><img src="/image/btn_roster.gif"  alt="ロースター作成"/></a>
+    </p>
+    <!-- 結果入力 -->
+    <p>
+    <a th:href="@{/roster}"><img src="/image/btn_result.gif"  alt="戦績入力"/></a>
+    </p>
+    <!-- リザルト出力 -->
+    <p>
+    <a th:href="@{/roster}"><img src="/image/btn_resultOut.gif"  alt="リザルト出力"/></a>
+    </p>
     <!--
     <a class="btn btn-primary" th:href="@{/items/{id}/edit(id=*{id})}">変更</a>
     <a class="btn btn-primary" th:href="@{/items/{id}/edit(id=*{id})}">変更</a>

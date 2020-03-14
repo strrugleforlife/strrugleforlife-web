@@ -35,30 +35,45 @@ public class StrrugleforlifeWebApplication {
 
     @GetMapping("roster")
     public String roster() {
-    	    return "roster";
+        return "roster";
     }
 
+    /**
+     * アップロードファイル読み込み
+     * @param file
+     * @param redirectAttributes
+     * @param model
+     * @return
+     * @throws IOException
+     */
     @PostMapping("/upload")////new annotation since 4.3
     public String singleFileUpload(@RequestParam("file") MultipartFile file,
-                                   RedirectAttributes redirectAttributes, Model model) throws IOException {
+            RedirectAttributes redirectAttributes, Model model) throws IOException {
 
-    	if (file.isEmpty()) {
-    	    return "roster";
-    	  }
-    	List<String> lines = new ArrayList<String>();
-    	List<Clan> clanList = new ArrayList<Clan>();
-
+        // 読み込んだCSVファイルの内容を格納
+        List<String> lines = new ArrayList<String>();
+        List<Clan> clanList = new ArrayList<Clan>();
+        int no = 1;
         String line = null;
+
+        // CSVファイルが空の場合は処理しない
+        if (file.isEmpty()) {
+            return "roster";
+        }
+
         try {
             InputStream stream = file.getInputStream();
             Reader reader = new InputStreamReader(stream);
             BufferedReader buf= new BufferedReader(reader);
             while((line = buf.readLine()) != null) {
-                lines.add(line);
                 Clan clan = new Clan();
+                lines.add(line);
                 clan.setClan(line);
+                clan.setNo(no);
+                no++;
                 clanList.add(clan);
             }
+
             line = buf.readLine();
 
         } catch (IOException e) {

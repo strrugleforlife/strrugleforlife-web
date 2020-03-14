@@ -1,3 +1,19 @@
-body {
-    background-image: url(../image/dark_Tire.png);
+header {
+    position: relative;
+    height: 65vh;
+    background: url(../image/header.png) center / cover;
+}
+
+@media only screen and (max-device-width: 1024px) {
+	header {
+    position: relative;
+    height: 30vh;
+    background: url(../image/header.png) center / cover;
+}
+@media only screen and (max-device-width: 460px) {
+    header {
+    position: relative;
+    height: 15vh;
+    background: url(../image/header.png) center / cover;
+}
 }

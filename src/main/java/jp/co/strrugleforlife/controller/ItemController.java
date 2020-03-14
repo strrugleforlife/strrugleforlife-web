@@ -17,7 +17,7 @@ import jp.co.strrugleforlife.domain.Item;
 import jp.co.strrugleforlife.service.ItemService;
 
 @Controller
-@RequestMapping("/items")
+@RequestMapping("/itemsmniongwlejwmopignwkltgmweklrfmnwioegna:as]@flkwe")
 public class ItemController {
 
   @Autowired

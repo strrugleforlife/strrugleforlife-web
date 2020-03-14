@@ -2,14 +2,25 @@ package jp.co.strrugleforlife.domain;
 
 public class Clan {
 
-	private String clan;
+    /** クラン名 **/
+    private String clan;
 
-	public String getClan() {
-		return clan;
-	}
+    /** No **/
+    private int no;
 
-	public void setClan(String clan) {
-		this.clan = clan;
-	}
+    public String getClan() {
+        return clan;
+    }
 
+    public void setClan(String clan) {
+        this.clan = clan;
+    }
+
+    public Integer getNo() {
+        return no;
+    }
+
+    public void setNo(Integer no) {
+        this.no = no;
+    }
 }

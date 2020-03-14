@@ -1,12 +1,27 @@
 <!DOCTYPE html>
 <html>
-<head>
-<meta charset="UTF-8"/>
-<title>Insert title here</title>
-</head>
+    <head>
+        <meta charset="UTF-8"/>
+        <link rel="stylesheet" href="/css/body.css" />
+        <title>Insert title here</title>
+    </head>
+
 <body>
-        <tr th:each="clan : ${clanList}">
-            <tr th:text="${clan.clan}"></tr>
+    <p>これで間違いないですかぁ？</p>
+    <table border="1" class="center">
+        <tr>
+            <td>No</td>
+            <td>Clan Name</td>
         </tr>
+
+        <tr th:each="clan : ${clanList}" >
+            <td th:text="${clan.no}"></td>
+            <td th:text="${clan.clan}"></td>
+        </tr>
+    </table>
+    <p>
+    <!-- 結果入力 -->
+    <a th:href="@{/}"><img src="/image/btn_submit.gif" alt="OK"/></a>
+    </p>
 </body>
 </html>
