@@ -32,6 +32,7 @@ import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
@@ -65,6 +66,7 @@ public class StrrugleforlifeWebApplication {
      */
     @ResponseBody
     @PostMapping("/upload")////new annotation since 4.3
+    @RequestMapping(value = "/upload", method = RequestMethod.GET, produces="text/plain;charset=utf-8")
     public HttpEntity<byte[]> singleFileUpload(@RequestParam("file") MultipartFile file,
             RedirectAttributes redirectAttributes, Model model) throws IOException {
 
