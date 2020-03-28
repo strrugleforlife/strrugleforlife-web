@@ -264,7 +264,7 @@ public class StrrugleforlifeWebApplication {
         //  ファイル保存
             try
             {
-//                  ImageIO.write(image, "jpeg", new File("src/main/resources/static/image/rosterConfirm.jpg"));
+                  ImageIO.write(image, "jpeg", new File("src/main/resources/static/image/rosterConfirm.jpg"));
 
                 ByteArrayOutputStream baos = new ByteArrayOutputStream();
                 BufferedOutputStream bos = new BufferedOutputStream(baos);
