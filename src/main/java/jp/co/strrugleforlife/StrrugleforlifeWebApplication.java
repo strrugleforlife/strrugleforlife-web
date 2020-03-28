@@ -108,7 +108,7 @@ public class StrrugleforlifeWebApplication {
 
         model.addAttribute("clanList", clanList);
 
-//        return "rosterConfirm";
+        return "rosterConfirm";
     }
 
     // ロースターを作成
