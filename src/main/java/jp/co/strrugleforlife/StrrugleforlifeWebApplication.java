@@ -25,9 +25,6 @@ import org.apache.tomcat.util.codec.binary.Base64;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.CollectionUtils;
@@ -35,7 +32,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.filter.CharacterEncodingFilter;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -67,9 +63,8 @@ public class StrrugleforlifeWebApplication {
      * @throws IOException
      * @throws FontFormatException
      */
-    @ResponseBody
     @PostMapping("/upload")////new annotation since 4.3
-    public HttpEntity<byte[]> singleFileUpload(@RequestParam("file") MultipartFile file,
+    public String singleFileUpload(@RequestParam("file") MultipartFile file,
             RedirectAttributes redirectAttributes, Model model) throws IOException, FontFormatException {
 
         // 読み込んだCSVファイルの内容を格納
@@ -104,32 +99,24 @@ public class StrrugleforlifeWebApplication {
             e.printStackTrace();
         }
 
-
         // ロースター作成
-        byte[] b = createRoster(lines);
-
-
-//        model.addAttribute("base64image",data);
-
-
-
-
 
         model.addAttribute("clanList", clanList);
-
+        model.addAttribute("base64data", createRoster(lines).toString());
 
 
      // レスポンスデータとして返却
-        HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.IMAGE_JPEG);
-        headers.setContentLength(b.length);
-        return new HttpEntity<byte[]>(b, headers);
+//        HttpHeaders headers = new HttpHeaders();
+//        headers.setContentType(MediaType.IMAGE_JPEG);
+//        headers.setContentLength(b.length);
+//        return new HttpEntity<byte[]>(b, headers);
 
-//        return "rosterConfirm";
+        return "rosterConfirm";
     }
 
+
     // ロースターを作成
-    public byte[]  createRoster(List<String> clanList) throws IOException, FontFormatException {
+    public StringBuffer  createRoster(List<String> clanList) throws IOException, FontFormatException {
 
         CharacterEncodingFilter characterEncodingFilter = new CharacterEncodingFilter();
         characterEncodingFilter.setEncoding("UTF-8");
@@ -175,11 +162,11 @@ public class StrrugleforlifeWebApplication {
         Graphics graphics = image.createGraphics();
 
         //  いたずら書き
-        Font titleFont = Font.createFont(Font.TRUETYPE_FONT, new FileInputStream("src/main/resources/static/font/GL-AntiquePlus.ttf"));
+        Font titleFont = Font.createFont(Font.TRUETYPE_FONT, new FileInputStream("src/main/resources/static/font/KTEGAKI.ttf"));
 
         titleFont = titleFont.deriveFont(27F);
 
-        Font clanFont = Font.createFont(Font.TRUETYPE_FONT, new FileInputStream("src/main/resources/static/font/GL-AntiquePlus.ttf"));
+        Font clanFont = Font.createFont(Font.TRUETYPE_FONT, new FileInputStream("src/main/resources/static/font/KTEGAKI.ttf"));
 
         clanFont = clanFont.deriveFont(25F);
 
@@ -189,7 +176,7 @@ public class StrrugleforlifeWebApplication {
 
         graphics.setFont(titleFont);
         graphics.setColor(Color.darkGray );
-        graphics.drawString(title,10,50);
+        graphics.drawString(title,50,50);
         // すくりむの日付を出力
         graphics.drawString(dateString, 870, 50);
 
@@ -278,7 +265,7 @@ public class StrrugleforlifeWebApplication {
     //
 //                String base64Image = new String(encoded,"ASCII");
     //
-                String base64 = new String(Base64.encodeBase64(bImage),"utf-8");
+                String base64 = new String(Base64.encodeBase64(bImage),"ASCII");
 
 
 
@@ -286,8 +273,8 @@ public class StrrugleforlifeWebApplication {
 
 
 //                String base64 = new String(Base64.encodeBase64(image.getByte()),"ASCII");
-                data.append("data:image/jpeg");
-                data.append(bImage);
+                data.append("data:image/jpeg;base64,");
+                data.append(base64);
             }
             catch (Exception e)
             {
@@ -304,8 +291,8 @@ public class StrrugleforlifeWebApplication {
 //            InputStream images = resource.getInputStream();
 
 
-//            return data;
-            return bImage;
+            return data;
+//            return bImage;
 
 
 //            System.out.println("終わりました");
