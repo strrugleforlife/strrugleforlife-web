@@ -99,7 +99,8 @@ public class StrrugleforlifeWebApplication {
         // ロースター作成
         BufferedImage data = createRoster(lines);
 
-        model.addAttribute("base64image",data);
+
+        model.addAttribute("base64image",data.toString());
 
 
 
@@ -107,7 +108,7 @@ public class StrrugleforlifeWebApplication {
 
         model.addAttribute("clanList", clanList);
 
-        return "rosterConfirm";
+//        return "rosterConfirm";
     }
 
     // ロースターを作成
