@@ -2,12 +2,14 @@ package jp.co.strrugleforlife;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.FontFormatException;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -63,11 +65,12 @@ public class StrrugleforlifeWebApplication {
      * @param model
      * @return
      * @throws IOException
+     * @throws FontFormatException
      */
     @ResponseBody
     @PostMapping("/upload")////new annotation since 4.3
     public HttpEntity<byte[]> singleFileUpload(@RequestParam("file") MultipartFile file,
-            RedirectAttributes redirectAttributes, Model model) throws IOException {
+            RedirectAttributes redirectAttributes, Model model) throws IOException, FontFormatException {
 
         // 読み込んだCSVファイルの内容を格納
         List<String> lines = new ArrayList<String>();
@@ -126,7 +129,7 @@ public class StrrugleforlifeWebApplication {
     }
 
     // ロースターを作成
-    public byte[]  createRoster(List<String> clanList) throws IOException {
+    public byte[]  createRoster(List<String> clanList) throws IOException, FontFormatException {
 
         CharacterEncodingFilter characterEncodingFilter = new CharacterEncodingFilter();
         characterEncodingFilter.setEncoding("UTF-8");
@@ -172,7 +175,12 @@ public class StrrugleforlifeWebApplication {
         Graphics graphics = image.createGraphics();
 
         //  いたずら書き
-        Font titleFont = new Font("GL-AntiquePlus",Font.ITALIC,30);
+        Font titleFont = Font.createFont(Font.TRUETYPE_FONT, new FileInputStream(".fonts/GL-AntiquePlus"));
+
+        titleFont = titleFont.deriveFont(30);
+
+
+//                new Font("GL-AntiquePlus",Font.ITALIC,30);
 
         Font clanFont = new Font("GL-AntiquePlus",Font.ITALIC,25);
 
