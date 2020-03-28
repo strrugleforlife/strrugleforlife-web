@@ -97,10 +97,10 @@ public class StrrugleforlifeWebApplication {
 
 
         // ロースター作成
-        BufferedImage data = createRoster(lines);
+        StringBuffer data = createRoster(lines);
 
 
-        model.addAttribute("base64image",data.toString());
+        model.addAttribute("base64image",data);
 
 
 
@@ -112,7 +112,7 @@ public class StrrugleforlifeWebApplication {
     }
 
     // ロースターを作成
-    public BufferedImage  createRoster(List<String> clanList) throws IOException {
+    public StringBuffer  createRoster(List<String> clanList) throws IOException {
 
         StringBuffer data = new StringBuffer();
 
@@ -291,17 +291,26 @@ public class StrrugleforlifeWebApplication {
 
 
 //                String base64 = new String(Base64.encodeBase64(image.getByte()),"ASCII");
-                data.append("data:image/jpeg;base64,");
-                data.append(base64);
+                data.append("data:image/jpeg");
+                data.append(bImage);
             }
             catch (Exception e)
             {
                   e.printStackTrace();
             }
 
+         // byteへ変換
+//            ByteArrayOutputStream bout = new ByteArrayOutputStream();
+//            bout.write(ImageIO.read(image));
+//
+//            ResourceLoader resourceLoader = null;
+//
+//            Resource resource = resourceLoader.getResource(image.toString());
+//            InputStream images = resource.getInputStream();
+
 
 //            return data;
-            return image;
+            return data;
 
 
 //            System.out.println("終わりました");
