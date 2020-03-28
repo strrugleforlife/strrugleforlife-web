@@ -156,10 +156,10 @@ public class StrrugleforlifeWebApplication {
 
 
         byte[] encoded = new byte[0];
-        String encodedStr = "";
+        String encodedStr = "すとりむ　ろーすたー";
 
-        encoded = Base64.encodeBase64("すとりむ　ろーすたー".getBytes("UTF-8"));
-        encodedStr = new String(encoded);
+//        encoded = Base64.encodeBase64("すとりむ　ろーすたー".getBytes("UTF-8"));
+//        encodedStr = new String(encoded);
 
 
         graphics.setFont(titleFont);
