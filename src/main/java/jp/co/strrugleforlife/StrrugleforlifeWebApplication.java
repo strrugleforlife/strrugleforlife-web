@@ -282,7 +282,7 @@ public class StrrugleforlifeWebApplication {
     //
 //                String base64Image = new String(encoded,"ASCII");
     //
-                String base64 = new String(Base64.encodeBase64(bImage),"ASCII");
+                String base64 = new String(Base64.encodeBase64(bImage),"utf-8");
 
 
 
