@@ -159,7 +159,7 @@ public class StrrugleforlifeWebApplication {
         }
 
         //日付の表示のフォーマットを作成
-        SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy/mm/dd");
+        SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy/MM/dd");
 
         //表示用に文字列に変換
         String dateString = dateFormatter.format(matchDay.getTime());
