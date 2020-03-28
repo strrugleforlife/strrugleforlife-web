@@ -172,9 +172,9 @@ public class StrrugleforlifeWebApplication {
         Graphics graphics = image.createGraphics();
 
         //  いたずら書き
-        Font titleFont = new Font("HGP創英角ﾎﾟｯﾌﾟ体",Font.ITALIC,30);
+        Font titleFont = new Font("GL-AntiquePlus",Font.ITALIC,30);
 
-        Font clanFont = new Font("HGP創英角ﾎﾟｯﾌﾟ体",Font.ITALIC,25);
+        Font clanFont = new Font("GL-AntiquePlus",Font.ITALIC,25);
 
 
         byte[] encoded = new byte[0];
