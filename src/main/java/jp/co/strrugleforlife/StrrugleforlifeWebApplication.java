@@ -97,9 +97,9 @@ public class StrrugleforlifeWebApplication {
 
 
         // ロースター作成
-        StringBuffer data = createRoster(lines);
+        BufferedImage data = createRoster(lines);
 
-        model.addAttribute("base64image",data.toString());
+        model.addAttribute("base64image",data);
 
 
 
@@ -111,7 +111,7 @@ public class StrrugleforlifeWebApplication {
     }
 
     // ロースターを作成
-    public StringBuffer  createRoster(List<String> clanList) throws IOException {
+    public BufferedImage  createRoster(List<String> clanList) throws IOException {
 
         StringBuffer data = new StringBuffer();
 
@@ -299,7 +299,8 @@ public class StrrugleforlifeWebApplication {
             }
 
 
-            return data;
+//            return data;
+            return image;
 
 
 //            System.out.println("終わりました");
