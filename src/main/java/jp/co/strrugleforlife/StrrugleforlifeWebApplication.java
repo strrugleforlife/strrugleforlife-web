@@ -1,18 +1,31 @@
 package jp.co.strrugleforlife;
 
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.image.BufferedImage;
+import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
+import javax.imageio.ImageIO;
+
+import org.apache.tomcat.util.codec.binary.Base64;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -82,9 +95,206 @@ public class StrrugleforlifeWebApplication {
             e.printStackTrace();
         }
 
+
+        // ロースター作成
+        StringBuffer data = createRoster(lines);
+
+        model.addAttribute("base64image",data.toString());
+
+
+
+
+
         model.addAttribute("clanList", clanList);
 
         return "rosterConfirm";
+    }
+
+    // ロースターを作成
+    public StringBuffer  createRoster(List<String> clanList) throws IOException {
+
+        StringBuffer data = new StringBuffer();
+
+        // BufferedImageを作成
+        BufferedImage image = null;
+
+        // すくりむ実施日
+        Calendar matchDay = Calendar.getInstance();
+
+        // 現在の日付を取得
+        Calendar todayCal = Calendar.getInstance();
+
+        // 今週の金曜日を取得
+        matchDay.set(Calendar.DAY_OF_WEEK,Calendar.FRIDAY);
+
+        // ロースター作成時点の日付が今週金曜日よりも後ろの場合
+        if (todayCal.after(matchDay)) {
+            // ７日加算
+            matchDay.add(Calendar.DATE,7);
+        }
+
+        //日付の表示のフォーマットを作成
+        SimpleDateFormat dateFormatter = new SimpleDateFormat("MMM/d");
+
+        //表示用に文字列に変換
+        String dateString = dateFormatter.format(matchDay.getTime());
+
+        //  ファイル読み込み
+        try
+        {
+              image = ImageIO.read(new File("src/main/resources/static/image/roster.jpg"));
+        } catch (Exception e) {
+              e.printStackTrace();
+        }
+
+        Graphics graphics = image.createGraphics();
+
+        //  いたずら書き
+        Font titleFont = new Font("HGP創英角ﾎﾟｯﾌﾟ体",Font.ITALIC,30);
+
+        Font clanFont = new Font("HGP創英角ﾎﾟｯﾌﾟ体",Font.ITALIC,25);
+
+        graphics.setFont(titleFont);
+        graphics.setColor(Color.darkGray );
+        graphics.drawString("すとりむ　ろーすたー",10,50);
+        // すくりむの日付を出力
+        graphics.drawString(dateString, 950, 50);
+
+
+        graphics.setFont(clanFont);
+
+        // 1 ～ 10 No出力位置 X
+        int x1 = 50;
+
+        // 1 ～ 10 クラン名出力位置 X
+        int x2 = 100;
+        // 1 ～ 10 クラン名出力位置 Y
+        int y2 = 80;
+
+        // クラン名間隔 Y
+        int y2Plus = 50;
+
+        int y2Plus_line = 5;
+
+        int clanNumber = 0;
+
+        if (!CollectionUtils.isEmpty(clanList)) {
+            clanNumber = clanList.size();
+        }
+
+
+
+        // 1 ～ 10 クラン名出力
+        for (int i = 1, index = 0; i <= 10; i++, index++) {
+            // Noを出力
+            graphics.drawString(i + ".", x1, y2 += y2Plus);
+
+            // Listの中身が殻の場合は空欄出力
+            if (i <= clanNumber) {
+                graphics.drawString(clanList.get(index), x2, y2);
+                graphics.drawLine(x1, y2 + y2Plus_line, 400, y2 + y2Plus_line);
+            } else {
+                graphics.drawString("", x2, y2);
+                graphics.drawLine(x1, y2 + y2Plus_line, 400, y2 + y2Plus_line);
+            }
+
+        }
+
+
+        // 11 ～ 20 No出力位置 X
+        x1 = 690;
+
+        // 11 ～ 20 クラン名出力位置 X
+        x2 = 740;
+        // 11 ～ 20 クラン名出力位置 Y
+        y2 = 80;
+
+        // 11 ～ 20 クラン名出力
+        for (int i = 1, no = 11; i <= 10; i++, no++) {
+            // クラン名出力
+            graphics.drawString(no + ".", x1, y2 += y2Plus);
+            graphics.drawString("Strrugle For Life", x2, y2);
+            graphics.drawLine(x1, y2 + y2Plus_line, 1040, y2 + y2Plus_line);
+        }
+
+//        graphics.drawString("2.", x1, y2 += y2Plus);
+//        graphics.drawString("Strrugle For Life", x2, y2);
+//        graphics.drawLine(x1, y2 + y2Plus_line, 400, y2 + y2Plus_line);
+//
+//        graphics.drawString("3.", x1, y2 += y2Plus);
+//        graphics.drawString("Strrugle For Life", x2, y2);
+//        graphics.drawLine(x1, y2 + y2Plus_line, 400, y2 + y2Plus_line);
+//
+//        graphics.drawString("4.", x1, y2 += y2Plus);
+//        graphics.drawString("Strrugle For Life", x2, y2);
+//        graphics.drawLine(x1, y2 + y2Plus_line, 400, y2 + y2Plus_line);
+//
+//        graphics.drawString("5.", x1, y2 += y2Plus);
+//        graphics.drawString("Strrugle For Life", x2, y2);
+//        graphics.drawLine(x1, y2 + y2Plus_line, 400, y2 + y2Plus_line);
+//
+//        graphics.drawString("6.", x1, y2 += y2Plus);
+//        graphics.drawString("Strrugle For Life", x2, y2);
+//        graphics.drawLine(x1, y2 + y2Plus_line, 400, y2 + y2Plus_line);
+//
+//        graphics.drawString("7.", x1, y2 += y2Plus);
+//        graphics.drawString("Strrugle For Life", x2, y2);
+//        graphics.drawLine(x1, y2 + y2Plus_line, 400, y2 + y2Plus_line);
+//
+//        graphics.drawString("8.", x1, y2 += y2Plus);
+//        graphics.drawString("Strrugle For Life", x2, y2);
+//        graphics.drawLine(x1, y2 + y2Plus_line, 400, y2 + y2Plus_line);
+//
+//        graphics.drawString("9.", 50, y2 += y2Plus);
+//        graphics.drawString("Strrugle For Life", x2, y2);
+//        graphics.drawLine(x1, y2 + y2Plus_line, 400, y2 + y2Plus_line);
+//
+//        graphics.drawString("10.", 50, y2 += y2Plus);
+//        graphics.drawString("Strrugle For Life", x2, y2);
+//        graphics.drawLine(x1, y2 + y2Plus_line, 400, y2 + y2Plus_line);
+
+        //  ファイル保存
+            try
+            {
+//                  ImageIO.write(image, "jpeg", new File("src/main/resources/static/image/rosterConfirm.jpg"));
+
+                ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                BufferedOutputStream bos = new BufferedOutputStream(baos);
+
+
+             // 読み終わった画像をバイト出力へ。
+                ImageIO.write(image, "jpeg", bos);
+                bos.flush();
+                bos.close();
+                byte[] bImage = baos.toByteArray();
+
+                // バイト配列→BASE64へ変換する
+//                Base64 base64 = new Base64();
+//                byte[] encoded = Base64.encodeBase64(bImage);
+    //
+//                String base64Image = new String(encoded,"ASCII");
+    //
+                String base64 = new String(Base64.encodeBase64(bImage),"ASCII");
+
+
+
+
+
+
+//                String base64 = new String(Base64.encodeBase64(image.getByte()),"ASCII");
+                data.append("data:image/jpeg;base64,");
+                data.append(base64);
+            }
+            catch (Exception e)
+            {
+                  e.printStackTrace();
+            }
+
+
+            return data;
+
+
+//            System.out.println("終わりました");
     }
 
     public static void main(String[] arguments) {
