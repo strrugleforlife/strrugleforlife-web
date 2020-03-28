@@ -23,6 +23,9 @@ import org.apache.tomcat.util.codec.binary.Base64;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.CollectionUtils;
@@ -30,6 +33,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -59,8 +63,9 @@ public class StrrugleforlifeWebApplication {
      * @return
      * @throws IOException
      */
+    @ResponseBody
     @PostMapping("/upload")////new annotation since 4.3
-    public String singleFileUpload(@RequestParam("file") MultipartFile file,
+    public HttpEntity<byte[]> singleFileUpload(@RequestParam("file") MultipartFile file,
             RedirectAttributes redirectAttributes, Model model) throws IOException {
 
         // 読み込んだCSVファイルの内容を格納
@@ -71,7 +76,7 @@ public class StrrugleforlifeWebApplication {
 
         // CSVファイルが空の場合は処理しない
         if (file.isEmpty()) {
-            return "roster";
+//            return "roster";
         }
 
         try {
@@ -97,10 +102,10 @@ public class StrrugleforlifeWebApplication {
 
 
         // ロースター作成
-        StringBuffer data = createRoster(lines);
+        byte[] b = createRoster(lines);
 
 
-        model.addAttribute("base64image",data);
+//        model.addAttribute("base64image",data);
 
 
 
@@ -108,11 +113,21 @@ public class StrrugleforlifeWebApplication {
 
         model.addAttribute("clanList", clanList);
 
-        return "rosterConfirm";
+
+
+     // レスポンスデータとして返却
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.IMAGE_JPEG);
+        headers.setContentLength(b.length);
+        return new HttpEntity<byte[]>(b, headers);
+
+//        return "rosterConfirm";
     }
 
     // ロースターを作成
-    public StringBuffer  createRoster(List<String> clanList) throws IOException {
+    public byte[]  createRoster(List<String> clanList) throws IOException {
+
+        byte[] bImage = null;
 
         StringBuffer data = new StringBuffer();
 
@@ -275,7 +290,7 @@ public class StrrugleforlifeWebApplication {
                 ImageIO.write(image, "jpeg", bos);
                 bos.flush();
                 bos.close();
-                byte[] bImage = baos.toByteArray();
+                bImage = baos.toByteArray();
 
                 // バイト配列→BASE64へ変換する
 //                Base64 base64 = new Base64();
@@ -310,7 +325,7 @@ public class StrrugleforlifeWebApplication {
 
 
 //            return data;
-            return data;
+            return bImage;
 
 
 //            System.out.println("終わりました");
