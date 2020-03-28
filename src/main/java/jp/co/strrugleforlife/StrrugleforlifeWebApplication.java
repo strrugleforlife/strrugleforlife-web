@@ -154,9 +154,17 @@ public class StrrugleforlifeWebApplication {
 
         Font clanFont = new Font("HGP創英角ﾎﾟｯﾌﾟ体",Font.ITALIC,25);
 
+
+        byte[] encoded = new byte[0];
+        String encodedStr = "";
+
+        encoded = Base64.encodeBase64("すとりむ　ろーすたー".getBytes("UTF-8"));
+        encodedStr = new String(encoded);
+
+
         graphics.setFont(titleFont);
         graphics.setColor(Color.darkGray );
-        graphics.drawString("すとりむ　ろーすたー",10,50);
+        graphics.drawString(encodedStr,10,50);
         // すくりむの日付を出力
         graphics.drawString(dateString, 950, 50);
 
