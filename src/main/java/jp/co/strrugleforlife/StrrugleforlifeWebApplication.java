@@ -248,7 +248,7 @@ public class StrrugleforlifeWebApplication {
             graphics.drawString(no + ".", x1, y2 += y2Plus);
 
          // Listの中身が殻の場合は空欄出力
-            if (index <= clanNumber) {
+            if (index < clanNumber) {
                 graphics.drawString(clanList.get(index), x2, y2);
                 graphics.drawLine(x1, y2 + y2Plus_line, 1040, y2 + y2Plus_line);
             } else {
