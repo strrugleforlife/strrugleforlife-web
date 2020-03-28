@@ -179,22 +179,17 @@ public class StrrugleforlifeWebApplication {
 
         titleFont = titleFont.deriveFont(27F);
 
+        Font clanFont = Font.createFont(Font.TRUETYPE_FONT, new FileInputStream("src/main/resources/static/font/GL-AntiquePlus.ttf"));
 
-//                new Font("GL-AntiquePlus",Font.ITALIC,30);
-
-        Font clanFont = new Font("GL-AntiquePlus",Font.ITALIC,25);
+        clanFont = clanFont.deriveFont(25F);
 
 
-        byte[] encoded = new byte[0];
-        String encodedStr = "すとりむ　ろーすたー";
-
-//        encoded = Base64.encodeBase64("すとりむ　ろーすたー".getBytes("UTF-8"));
-//        encodedStr = new String(encoded);
+        String title = "すとりむ　ろーすたー";
 
 
         graphics.setFont(titleFont);
         graphics.setColor(Color.darkGray );
-        graphics.drawString(encodedStr,10,50);
+        graphics.drawString(title,10,50);
         // すくりむの日付を出力
         graphics.drawString(dateString, 870, 50);
 
@@ -248,48 +243,19 @@ public class StrrugleforlifeWebApplication {
         y2 = 80;
 
         // 11 ～ 20 クラン名出力
-        for (int i = 1, no = 11; i <= 10; i++, no++) {
+        for (int i = 1, index = 10, no = 11; i <= 10; i++, no++, index++) {
             // クラン名出力
             graphics.drawString(no + ".", x1, y2 += y2Plus);
-            graphics.drawString("Strrugle For Life", x2, y2);
-            graphics.drawLine(x1, y2 + y2Plus_line, 1040, y2 + y2Plus_line);
-        }
 
-//        graphics.drawString("2.", x1, y2 += y2Plus);
-//        graphics.drawString("Strrugle For Life", x2, y2);
-//        graphics.drawLine(x1, y2 + y2Plus_line, 400, y2 + y2Plus_line);
-//
-//        graphics.drawString("3.", x1, y2 += y2Plus);
-//        graphics.drawString("Strrugle For Life", x2, y2);
-//        graphics.drawLine(x1, y2 + y2Plus_line, 400, y2 + y2Plus_line);
-//
-//        graphics.drawString("4.", x1, y2 += y2Plus);
-//        graphics.drawString("Strrugle For Life", x2, y2);
-//        graphics.drawLine(x1, y2 + y2Plus_line, 400, y2 + y2Plus_line);
-//
-//        graphics.drawString("5.", x1, y2 += y2Plus);
-//        graphics.drawString("Strrugle For Life", x2, y2);
-//        graphics.drawLine(x1, y2 + y2Plus_line, 400, y2 + y2Plus_line);
-//
-//        graphics.drawString("6.", x1, y2 += y2Plus);
-//        graphics.drawString("Strrugle For Life", x2, y2);
-//        graphics.drawLine(x1, y2 + y2Plus_line, 400, y2 + y2Plus_line);
-//
-//        graphics.drawString("7.", x1, y2 += y2Plus);
-//        graphics.drawString("Strrugle For Life", x2, y2);
-//        graphics.drawLine(x1, y2 + y2Plus_line, 400, y2 + y2Plus_line);
-//
-//        graphics.drawString("8.", x1, y2 += y2Plus);
-//        graphics.drawString("Strrugle For Life", x2, y2);
-//        graphics.drawLine(x1, y2 + y2Plus_line, 400, y2 + y2Plus_line);
-//
-//        graphics.drawString("9.", 50, y2 += y2Plus);
-//        graphics.drawString("Strrugle For Life", x2, y2);
-//        graphics.drawLine(x1, y2 + y2Plus_line, 400, y2 + y2Plus_line);
-//
-//        graphics.drawString("10.", 50, y2 += y2Plus);
-//        graphics.drawString("Strrugle For Life", x2, y2);
-//        graphics.drawLine(x1, y2 + y2Plus_line, 400, y2 + y2Plus_line);
+         // Listの中身が殻の場合は空欄出力
+            if (index <= clanNumber) {
+                graphics.drawString(clanList.get(index), x2, y2);
+                graphics.drawLine(x1, y2 + y2Plus_line, 1040, y2 + y2Plus_line);
+            } else {
+                graphics.drawString("", x2, y2);
+                graphics.drawLine(x1, y2 + y2Plus_line, 1040, y2 + y2Plus_line);
+            }
+        }
 
         //  ファイル保存
             try
