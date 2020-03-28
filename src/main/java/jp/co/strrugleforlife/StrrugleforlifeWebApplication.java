@@ -177,7 +177,7 @@ public class StrrugleforlifeWebApplication {
         //  いたずら書き
         Font titleFont = Font.createFont(Font.TRUETYPE_FONT, new FileInputStream("src/main/resources/static/font/GL-AntiquePlus.ttf"));
 
-        titleFont = titleFont.deriveFont(30F);
+        titleFont = titleFont.deriveFont(27F);
 
 
 //                new Font("GL-AntiquePlus",Font.ITALIC,30);
@@ -196,7 +196,7 @@ public class StrrugleforlifeWebApplication {
         graphics.setColor(Color.darkGray );
         graphics.drawString(encodedStr,10,50);
         // すくりむの日付を出力
-        graphics.drawString(dateString, 950, 50);
+        graphics.drawString(dateString, 870, 50);
 
 
         graphics.setFont(clanFont);
