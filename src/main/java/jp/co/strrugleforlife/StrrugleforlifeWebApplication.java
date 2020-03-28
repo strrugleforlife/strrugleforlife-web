@@ -177,7 +177,7 @@ public class StrrugleforlifeWebApplication {
         //  いたずら書き
         Font titleFont = Font.createFont(Font.TRUETYPE_FONT, new FileInputStream("src/main/resources/static/font/GL-AntiquePlus.ttf"));
 
-        titleFont = titleFont.deriveFont(30);
+        titleFont = titleFont.deriveFont(30F);
 
 
 //                new Font("GL-AntiquePlus",Font.ITALIC,30);
