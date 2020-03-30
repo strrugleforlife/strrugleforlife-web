@@ -17,7 +17,7 @@ header {
 @media only screen and (max-device-width: 460px) {
     header {
     position:relative;
-    max-width: 100%;
+    max-width: 90%;
     height:20vh;
     background: url(../image/title.png);
     background-repeat: no-repeat;
