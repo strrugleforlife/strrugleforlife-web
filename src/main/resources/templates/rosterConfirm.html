@@ -3,11 +3,13 @@
     <head>
         <meta charset="UTF-8"/>
         <link rel="stylesheet" href="/css/body.css" />
-        <title>Insert title here</title>
+        <title>ロースター確認画面</title>
     </head>
 
 <body>
     <p>これで間違いないですかぁ？</p>
+
+<!--
     <table border="1" class="center">
         <tr>
             <td>No</td>
@@ -19,13 +21,16 @@
             <td th:text="${clan.clan}"></td>
         </tr>
     </table>
+ -->
+
+    <p>
+    <img th:src="${base64data}"/>
+    </p>
+
     <p>
     <!-- 結果入力 -->
     <a th:href="@{/}"><img src="/image/btn_submit.gif" alt="OK"/></a>
     </p>
-
-    <img src="/image/rosterConfirm.jpg"/>
-    <img th:src="${base64data}"/>
 
 </body>
 </html>

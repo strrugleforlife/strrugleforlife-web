@@ -1,18 +1,27 @@
+@font-face {
+      font-family: "test-font01";
+      src:url("../font/KTEGAKI.ttf") format("truetype");
+    }
+
 body {
-    background-image: url(../image/dark_Tire.png);
-}
+    background-image: url(../image/back.jpg);
+    font-family: "test-font01", serif
+    }
 
 p {
     text-align: center;
-    color: White;
+    font-size: 3vw;
+    }
+
+h2 {
+	font-size: 5vw;
 }
 
 table tr td{
     align: center;
-    color: White;
-}
+    }
 
 table.center{
     margin-left: auto ;
     margin-right: auto ;
-   }
+    }
