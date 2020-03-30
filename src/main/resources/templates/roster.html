@@ -1,17 +1,51 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8"/>
-        <link rel="stylesheet" href="/css/body.css" />
-        <title>ロースター作成ファイルアップロード</title>
-    </head>
+<head>
+    <meta charset="UTF-8"/>
+    <link rel="stylesheet" href="/css/body.css" />
+    <link rel="stylesheet" href="/css/header.css" />
+    <title>ロースター作成ファイルアップロード</title>
+
+    <script>
+
+    jQuery(function($) {
+        jQuery("#id_img").click(function() {
+            var selectFileSample4 = document.getElementById("id_img");
+            selectFileSample4.click();
+        });
+    });
+
+    function changeSelectFileSample4() {
+        // ファイル名のみ取得して表示します
+        var selectFileSample4 = document.getElementById("id_img").value;
+        var regex = /\\|\\/;
+        var array = selectFileSample4.split(regex);
+        document.getElementById("selectFileSample6").value = array[array.length - 1];
+    }
+
+    </script>
+</head>
+<header>
+</header>
 
 <body>
     <h2>ファイルアップロード</h2>
 
     <form method="POST" action="/upload" enctype="multipart/form-data">
-        <input type="file" name="file"/><br/><br/>
-        <input type="submit" value="Submit"/>
+
+    <label for="id_img" >
+        <span>ファイルを選択</span>
+        <br></br>
+
+        <input id = "id_img" type="file" name="file" style="display:none;" onchange="changeSelectFileSample4()" />
+</label>
+
+        <input id="selectFileSample6" type="text" name="selectFileSample6" value="" size="50" readonly="readonly" class="uploadFileName" />
+
+
+        <input id = "uploadButton" type="submit" value="ろーすたー作成" class="uploadButton" />
+
     </form>
+
 </body>
 </html>

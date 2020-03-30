@@ -4,9 +4,22 @@
     }
 
 body {
+    position: absolute;
+    top: 10px;
     background-image: url(../image/back.jpg);
-    font-family: "test-font01", serif
+    font-family: "test-font01", serif;
+    width: 100%;
     }
+
+@media only screen and (max-device-width: 460px) {
+body {
+    position: absolute;
+    top: 0px;
+    background-image: url(../image/back.jpg);
+    font-family: "test-font01", serif;
+    width: 100%;
+    }
+}
 
 p {
     text-align: center;
@@ -14,7 +27,11 @@ p {
     }
 
 h2 {
-	font-size: 5vw;
+    position: absolute;
+    left: 30%;
+    top: 40%;
+    margin: auto;
+    font-size: 5vw;
 }
 
 table tr td{
@@ -25,3 +42,137 @@ table.center{
     margin-left: auto ;
     margin-right: auto ;
     }
+
+
+span {
+    position:relative;
+    left:30%;
+display: block;
+color: #fff;
+font-weight: bold;
+font-size: 18px;
+font-family: "test-font01";
+src:url("../font/KTEGAKI.ttf") format("truetype");
+background: #ee7800;
+padding: 8px 0;
+border-radius: 12px;
+max-width: 240px;
+text-align: center;
+transition: .3s;
+cursor:pointer;
+}
+span:hover {
+background: #000;
+}
+
+@media only screen and (max-device-width: 1024px) {
+span {
+    position: absolute;
+    top: 60%;
+display: block;
+color: #fff;
+font-weight: bold;
+font-size: 27px;
+font-family: "test-font01";
+src:url("../font/KTEGAKI.ttf") format("truetype");
+background: #ee7800;
+padding: 9px 0;
+border-radius: 11px;
+max-width: 240px;
+text-align: center;
+transition: .3s;
+cursor:pointer;
+}
+span:hover {
+background: #000;
+}
+
+input.uploadFileName{
+    position:absolute;
+    top:75%;
+    left:30%;
+    background-color:rgba(0,0,0,0);
+    border:none;
+    font-weight: bold;
+    font-size: 18px;
+    font-family: "test-font01";
+    src:url("../font/KTEGAKI.ttf") format("truetype");
+}
+
+input.uploadButton{
+        position: absolute;
+    top: 72%;
+    left: 60%;
+display: block;
+color: #fff;
+font-weight: bold;
+font-size: 15px;
+font-family: "test-font01";
+src:url("../font/KTEGAKI.ttf") format("truetype");
+background: #f573d9;
+padding: 9px 0;
+border-radius: 11px;
+max-width: 240px;
+text-align: center;
+transition: .3s;
+cursor:pointer;
+}
+
+}
+
+
+@media only screen and (max-device-width: 460px) {
+span {
+    position: absolute;
+    top: 60%;
+display: block;
+color: #fff;
+font-weight: bold;
+font-size: 27px;
+font-family: "test-font01";
+src:url("../font/KTEGAKI.ttf") format("truetype");
+background: #ee7800;
+padding: 9px 0;
+border-radius: 11px;
+max-width: 240px;
+text-align: center;
+transition: .3s;
+cursor:pointer;
+}
+span:hover {
+background: #000;
+}
+
+input.uploadFileName{
+    position:absolute;
+    top:75%;
+    left:30%;
+    background-color:rgba(0,0,0,0);
+    border:none;
+    font-weight: bold;
+    font-size: 18px;
+    font-family: "test-font01";
+    src:url("../font/KTEGAKI.ttf") format("truetype");
+}
+
+input.uploadButton{
+        position: absolute;
+    top: 73%;
+    left: 60%;
+display: block;
+color: #fff;
+font-weight: bold;
+font-size: 15px;
+font-family: "test-font01";
+src:url("../font/KTEGAKI.ttf") format("truetype");
+background: #f573d9;
+padding: 9px 0;
+border-radius: 11px;
+max-width: 240px;
+text-align: center;
+transition: .3s;
+cursor:pointer;
+}
+
+}
+
